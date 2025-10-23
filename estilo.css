@@ -1,0 +1,141 @@
+/* --- CAMBIO 1: Importamos las fuentes del otro CSS --- */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Quicksand:wght@300..700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  background: #e0e0e0; /* <-- Mantenemos el fondo para el Neumorfismo */
+  
+  /* --- CAMBIO 2: Usamos Quicksand como fuente base --- */
+  font-family: "Quicksand", sans-serif;
+  color: #333;
+}
+
+/* ===== ENCABEZADO ===== */
+.head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#a {
+  /* --- CAMBIO 3: Usamos Dancing Script y el color morado --- */
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem; /* (Le aumenté un poco el tamaño para la nueva fuente) */
+  font-weight: 700;
+  color: #7b1fa2; /* <-- Color del otro CSS */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7),
+    -2px -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.start {
+  background: #e0e0e0;
+  width: 350px;
+  padding: 40px 25px;
+  border-radius: 25px;
+  box-shadow:
+    9px 9px 18px #bebebe,
+    -9px -9px 18px #ffffff;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.start:hover {
+  box-shadow:
+    inset 9px 9px 18px #bebebe,
+    inset -9px -9px 18px #ffffff;
+}
+
+/* ===== TÍTULO SECUNDARIO ===== */
+.start h2 {
+  /* --- CAMBIO 4: Usamos Dancing Script también aquí --- */
+  font-family: "Dancing Script", cursive;
+  font-size: 1.6rem; /* (Ajuste de tamaño) */
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+/* ===== BOTÓN NEOMORFISTA ===== */
+.boton {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 50px;
+  box-shadow:
+    5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  /* (La fuente Quicksand se hereda del body) */
+}
+
+.boton:hover {
+  color: #7b1fa2; /* <-- Este ya coincidía, ¡perfecto! */
+  box-shadow:
+    inset 5px 5px 10px #bebebe,
+    inset -5px -5px 10px #ffffff;
+}
+
+.boton:active {
+  transform: scale(0.97);
+}
+
+/* ===== IMAGEN DE FLORES ===== */
+.flor {
+  width: 220px;
+  display: block;
+  margin: 40px auto 0;
+  opacity: 0.9;
+  animation: breathing 4s ease-in-out infinite;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animación “Respiración” */
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.07);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .start {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  #a {
+    font-size: 2.5rem; /* (Ajuste para la nueva fuente) */
+  }
+
+  .start h2 {
+    font-size: 1.4rem; /* (Ajuste para la nueva fuente) */
+  }
+
+  .flor {
+    width: 180px;
+  }
+}

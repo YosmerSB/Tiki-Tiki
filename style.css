@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Quicksand:wght@300..700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: linear-gradient(135deg, #f9f9ff, #e0f7fa);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* <-- CORRECCIÓN 1: De height a min-height */
+  /* overflow: hidden; */ /* <-- CORRECCIÓN 2: Eliminamos esta línea */
+}
+
+/* ===== ENCABEZADO ===== */
+.head {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.head h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #7b1fa2;
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== CONTENEDOR ===== */
+.contenedor {
+  flex: 1; /* Esto es importante, hace que el contenedor empuje el footer hacia abajo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  flex-wrap: nowrap;
+}
+
+/* ===== STACK DE CARDS (IZQUIERDA) ===== */
+.stack {
+  position: relative;
+  width: 300px;
+  height: 420px;
+  perspective: 1000px;
+  flex-shrink: 0;
+}
+
+.card {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  background-color: transparent;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25),
+    0 15px 20px rgba(0, 0, 0, 0.125);
+  transition: transform 0.6s;
+  user-select: none;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+/* Profundidad visual */
+.card:nth-last-child(n + 5) {
+  --x: calc(-50% + 70px);
+  transform: translate(var(--x), -50%) scale(0.75);
+}
+.card:nth-last-child(4) {
+  --x: calc(-50% + 45px);
+  transform: translate(var(--x), -50%) scale(0.82);
+}
+.card:nth-last-child(3) {
+  --x: calc(-50% + 25px);
+  transform: translate(var(--x), -50%) scale(0.9);
+}
+.card:nth-last-child(2) {
+  --x: calc(-50%);
+  transform: translate(var(--x), -50%) scale(0.96);
+}
+.card:nth-last-child(1) {
+  --x: calc(-50% - 25px);
+  transform: translate(var(--x), -50%) scale(1);
+  z-index: 10;
+}
+.card:nth-last-child(1) img {
+  box-shadow: 0 1px 5px 5px rgba(255, 193, 111, 0.5);
+}
+
+/* Animación */
+.swap {
+  animation: swap 1.3s ease-out forwards;
+}
+@keyframes swap {
+  30% {
+    transform: translate(calc(var(--x) - 200px), -50%) scale(0.75)
+      rotate(-5deg) rotateY(65deg);
+  }
+  100% {
+    transform: translate(calc(var(--x) - 30px), -50%) scale(0.5);
+    z-index: -1;
+  }
+}
+
+/* ===== TARJETA (DERECHA) ===== */
+.tarjeta {
+  width: 450px;
+  height: 550px;
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow:
+    10px 10px 25px rgba(0, 0, 0, 0.25),
+    -10px -10px 20px rgba(255, 255, 255, 0.6);
+  background-color: #e0f7fa;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+.tarjeta:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    15px 15px 30px rgba(0, 0, 0, 0.3),
+    -15px -15px 25px rgba(255, 255, 255, 0.7);
+}
+.tarjeta video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  z-index: 0;
+}
+.tarjeta .mensaje {
+  position: relative;
+  z-index: 1;
+  color: white;
+  padding: 25px;
+  text-align: center;
+  font-family: "SimSun-ExtG";
+  font-size: 1.3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1050px) {
+  .contenedor {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    /* overflow-y: auto; <-- CORRECCIÓN 3: Eliminamos esto, es redundante */
+    padding-bottom: 40px;
+  }
+
+  .stack {
+    width: 250px;
+    height: 350px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    width: 250px;
+    height: 350px;
+  }
+
+  .tarjeta {
+    width: 350px;
+    height: 450px;
+  }
+
+  /* body { <-- CORRECCIÓN 4: Eliminamos este bloque que también era redundante */
+  /* overflow: auto; */
+  /* } */
+}
+
+@media (max-width: 600px) {
+  .head h1 {
+    font-size: 2.2rem;
+  }
+
+  .tarjeta {
+    width: 300px;
+    height: 420px;
+  }
+
+  .tarjeta .mensaje {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 10px 20px 20px 20px; /* Espaciado para que no esté pegado */
+  color: #7b1fa2; /* Mismo color morado del título h1 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil similar al h1 */
+  margin-top: 10px; /* Pequeño margen superior */
+}
+
+/* Texto de "Con mucho cariño" y "Te Quiero Mucho" */
+footer p.footer-saludo,
+footer p.footer-extra {
+  font-family: "Dancing Script", cursive; /* Misma fuente que el h1 y la tarjeta */
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+/* Texto de "De: Yosmer Silvia" */
+footer p.footer-nombre {
+  font-family: "Quicksand", sans-serif; /* Misma fuente del cuerpo */
+  font-size: 1rem;
+  font-weight: 600; /* Un poco más de grosor */
+  margin: 5px 0; /* Espacio entre las líneas */
+}
+
+/* ===== AJUSTES RESPONSIVE PARA EL FOOTER ===== */
+/* Hacemos el texto del footer un poco más pequeño en móviles */
+@media (max-width: 600px) {
+  footer p.footer-saludo,
+  footer p.footer-extra {
+    font-size: 1.4rem;
+  }
+
+  footer p.footer-nombre {
+    font-size: 0.9rem;
+  }
+}
